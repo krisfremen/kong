@@ -93,6 +93,7 @@ function AWSLambdaHandler:access(conf)
 
     if conf.forward_request_headers then
       upstream_body.request_headers = ngx_req_get_headers()
+      upstream_body.request_headers["X-Forwarded-For"] = ngx.var.remote_addr
     end
 
     if conf.forward_request_uri then
